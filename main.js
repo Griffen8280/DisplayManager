@@ -1,7 +1,7 @@
 // main.js
 
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, Menu } = require('electron')
+const { app, BrowserWindow, Menu, ipcMain, nativeTheme } = require('electron')
 const path = require('path')
 const shell = require('electron').shell
 
@@ -12,7 +12,8 @@ const createWindow = () => {
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
-    }
+    },
+    frame: false
   })
 
   // and load the index.html of the app.
@@ -20,39 +21,6 @@ const createWindow = () => {
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
-
-  var menu = Menu.buildFromTemplate([
-    {
-        label: 'Menu',
-        submenu: [
-            {
-                label: 'Exit',
-                click(){
-                    app.quit()
-                }
-            }
-        ]
-    },
-    {
-        label: 'Help',
-        submenu: [
-            {
-                label: 'GitHub',
-                click(){
-                    shell.openExternal('https://github.com/Griffen')
-                }
-            }
-            {
-                label: 'About',
-                click(){
-
-                }
-            }
-        ]
-    }
-  ])
-
-  Menu.setApplicationMenu(menu);
 }
 
 // This method will be called when Electron has finished
@@ -73,6 +41,16 @@ app.whenReady().then(() => {
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
+})
+
+ipcMain.on(`display-app-menu`, function(e, args) {
+  if (isWindows && mainWindow) {
+    menu.popup({
+      window: mainWindow,
+      x: args.x,
+      y: args.y
+    })
+  }
 })
 
 // In this file you can include the rest of your app's specific main process

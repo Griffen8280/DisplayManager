@@ -2,14 +2,46 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>Hello World!</title>
+    <link rel="stylesheet" type="text/css" href="../assets/css/photon.css">
   </head>
   <body>
+    <header class="toolbar toolbar-header">
+      <div id="menu-bar">
+        <div class="left" role="menu">
+          <button class="menubar-btn" id="menu-btn"><span class="icon icon-menu"></span></button>
+          <h1 class="title">Display Manager</h1>
+        </div> 
+        <div class="right">
+          <button class="menubar-btn btn-default" id="minimize-btn"><span class="icon icon-minus-squared"></span></button>
+          <button class="menubar-btn btn-default" id="max-unmax-btn"><span class="icon icon-plus-squared"></span></button>
+          <button class="menubar-btn btn-default" id="close-btn"><span class="icon icon-cancel-squared"></span></button>
+        </div>
+      </div>
+    </header>
+    <div class="tab-group">
+      <div class="tab-item">
+        <span class="icon icon-cancel icon-close-tab"></span>
+        Tab
+      </div>
+      <div class="tab-item active">
+        <span class="icon icon-cancel icon-close-tab"></span>
+        Tab active
+      </div>
+      <div class="tab-item">
+        <span class="icon icon-cancel icon-close-tab"></span>
+        Tab
+      </div>
+      <div class="tab-item tab-item-fixed">
+        <span class="icon icon-plus"></span>
+      </div>
+    </div>
     <h1>Hello World!</h1>
+    
     We are using Node.js <span id="node-version"></span>,
     Chromium <span id="chrome-version"></span>,
     and Electron <span id="electron-version"></span>.
+
+    <script src="../renderer.js"></script>
   </body>
 </html>
