@@ -1,7 +1,7 @@
 # DDCUtil Setup Info
 
 ## Install
-`sudo apt isntall ddcutil`
+`sudo apt install ddcutil`
 
 `sudo usermod -aG i2c $USER`
 
